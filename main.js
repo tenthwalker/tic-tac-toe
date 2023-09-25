@@ -15,14 +15,14 @@ var buttonsClicked1 = [];
 var buttonsClicked2 = [];
 var players = [];
 var winCombos = [
-  [1, 2, 3],
-  [4, 5, 6],
-  [7, 8, 9],
+  [0, 1, 2],
+  [3, 4, 5],
+  [6, 7, 8],
   [1, 4, 7],
   [2, 5, 8],
-  [3, 6, 9],
-  [1, 5, 9],
-  [3, 5, 7]
+  [0, 3, 6],
+  [0, 4, 8],
+  [2, 4, 6]
 ];
 
 // function to create objects to store player info (id, token, wins)
@@ -34,21 +34,20 @@ function createPlayer(id, token, wins) {
   }
   players.push(player);
 }
-
+var player1 = players[0];
+var player2 = players[1];
 // function increaseWins to increase the count of either player's wins
-function increaseWins(players) {
-  for (var i = 0; i < players.length; i++) {
-    players[i].wins += 1;
-    if (players[i].id == 1) {
-      player1Win.innerHTML = players[i].wins;
-    } else (players[i].id == 2) {
-      player2Win.innerHTML = players[i].wins;
-    }
+function increaseWins(player) {
+  player.wins += 1;
+  if (player.id == 1) {
+    player1Win.innerHTML = player.wins;
+  } else if (player.id == 2) {
+    player2Win.innerHTML = player.wins;
   }
 }
 
 // function to keep track of the data for the game board
-// if conditional to check if button has been clicked
+// if conditional to check if button has been clicked (event.target?)
 // if already clicked, do nothing, if not, update innerHTML of button to players[i].token depending on player's turn and call turnTracker()
 // push clicked buttons to either buttonsClicked1 or 2 depending on players[i] turn
 
@@ -63,8 +62,16 @@ display.innerHTML = ``;
 // function to check game board for win conditions
 function win() {
 // loop through winCombos, check for match to buttonsClicked1 or 2
-display.innerHTML = `${players[i].token} won!`;
-increaseWins();
+for (var i = 0; i < winCombos.length; i++) {
+  if (buttonsClicked1.contains(winCombos[i])) {
+    display.innerHTML = `${player1.token} won!`;
+    increaseWins(player1);
+  }
+  if (buttonsClicked2.contains(winCombos[i])) {
+    display.innerHTML = `${player2.token} won!`;
+    increaseWins(player2);
+  }
+}
 reset();
 }
 
@@ -75,8 +82,9 @@ reset()
 }
 
 // function to reset the game board and data to begin a new game
-// setTimeout() calls reset() * 3000 to wait 3 seconds before resetting
+
 function reset() {
+setTimeout(reset, 3 * 1000);
 display.innerHTML = "";
 playerStart += 1;
 buttonsClicked1 = [];
