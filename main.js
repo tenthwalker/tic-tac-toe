@@ -73,10 +73,9 @@ console.log(event.target, "event.target")
     currentTurn += 1;
     win();
     draw();
-    if (gameState === true) {
-      turnTracker();
-    }
-  }
+    turnTracker();
+  } 
+  console.log(remainingChoices);
 }
 
 // function to keep track of player's turns (whose turn is it)
@@ -86,7 +85,9 @@ function turnTracker() {
   } else {
     currentPlayer = player1;
   }
-display.innerHTML = `It's ${currentPlayer.token}'s turn!`;
+  if (gameState === true) {
+    display.innerHTML = `It's ${currentPlayer.token}'s turn!`;
+  }
 return currentPlayer;
 }
 
@@ -105,7 +106,6 @@ function win() {
     console.log(buttonsClicked1, "buttonsclicked1")
     console.log(buttonsClicked2, "buttonsclicked2")
   for (var i = 0; i < winCombos.length; i++) {
-    console.log(winCombos[i][0], winCombos[i][1], winCombos[i][2], "wincombos[i]0-2")
     if (buttonsClicked1.includes(winCombos[i][0]) && buttonsClicked1.includes(winCombos[i][1]) && buttonsClicked1.includes(winCombos[i][2])) {
       gameState = false;
       display.innerHTML = `${player1.token} won!`;
@@ -131,7 +131,6 @@ function draw() {
 
 // function to reset the game board and data to begin a new game
 function reset() {
-display.innerHTML = "";
 playerStart += 1;
 currentTurn = playerStart;
 for (var i = 0; i < buttonsArray.length; i++) {
@@ -142,4 +141,5 @@ remainingChoices = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 buttonsClicked1 = [];
 buttonsClicked2 = [];
 gameState = true;
+turnTracker();
 }
