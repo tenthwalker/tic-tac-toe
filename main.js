@@ -25,7 +25,7 @@ var playerStart = 1;
 var currentTurn = 1;
 var buttonsClicked1 = [];
 var buttonsClicked2 = [];
-var remainingChoices = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+var remainingChoices = ['0', '1', '2', '3', '4', '5', '6', '7', '8'];
 var gameState = true;
 var winCombos = [
   ['0', '1', '2'],
@@ -87,9 +87,9 @@ return currentPlayer;
 
 function increaseWins() {
   currentPlayer.wins += 1;
-  if (currentPlayer.id == 1) {
+  if (currentPlayer.id === 1) {
     player1Win.innerHTML = `wins: ${currentPlayer.wins}`;
-  } else if (currentPlayer.id == 2) {
+  } else if (currentPlayer.id === 2) {
     player2Win.innerHTML = `wins: ${currentPlayer.wins}`;
   }
 }
@@ -112,7 +112,7 @@ function win() {
 }
 
 function draw() {
-  if ((remainingChoices.length < 2) && (gameState = true)) {
+  if ((remainingChoices.length < 1) && (gameState = true)) {
     gameState = false;
     display.innerHTML = "It's a draw!";
     setTimeout(reset, 3 * 1000);
