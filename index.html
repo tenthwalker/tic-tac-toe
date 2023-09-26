@@ -4,18 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tic-Tac-Toe</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Arimo:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
     <section class="player-side">
-      <div class="player-box-wrapper" id="player-1">
-        <p>&#129384</p>
+      <div class="player-box-wrapper">
+        <p class="player-icon">&#129384</p>
         <p class="win-tracker" id="p1">
         wins: 0
         </p>
       </div>
     </section>
-    <section>
+    <section class="middle">
       <p id="messageBoard">
         It's &#129384's turn!
       </p>
@@ -32,8 +35,8 @@
       </div>
     </section>
     <section class="player-side">
-      <div class="player-box-wrapper" id="player-2">
-        <p>&#128031</p>
+      <div class="player-box-wrapper">
+        <p class="player-icon">&#128031</p>
         <p class="win-tracker" id="p2">
         wins: 0
         </p>
