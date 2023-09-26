@@ -27,16 +27,16 @@ var currentTurn = 1;
 var buttonsClicked1 = [];
 var buttonsClicked2 = [];
 var remainingChoices = [0, 1, 2, 3, 4, 5, 6, 7, 8];
-
+var gameState = true;
 var winCombos = [
-  [0, 1, 2],
-  [3, 4, 5],
-  [6, 7, 8],
-  [1, 4, 7],
-  [2, 5, 8],
-  [0, 3, 6],
-  [0, 4, 8],
-  [2, 4, 6]
+  ["0", "1", "2"],
+  ["3", "4", "5"],
+  ["6", "7", "8"],
+  ["1", "4", "7"],
+  ["2", "5", "8"],
+  ["0", "3", "6"],
+  ["0", "4", "8"],
+  ["2", "4", "6"]
 ];
 var currentPlayer;
 
@@ -73,7 +73,9 @@ console.log(event.target, "event.target")
     currentTurn += 1;
     win();
     draw();
-    turnTracker();
+    if (gameState === true) {
+      turnTracker();
+    }
   }
 }
 
@@ -103,16 +105,18 @@ function win() {
     console.log(buttonsClicked1, "buttonsclicked1")
     console.log(buttonsClicked2, "buttonsclicked2")
   for (var i = 0; i < winCombos.length; i++) {
-    console.log(winCombos[i], "wincombos[i]")
-    if (buttonsClicked1.includes((winCombos[i][0]) && (winCombos[i][2]) && (winCombos[i][3]))) {
+    console.log(winCombos[i][0], winCombos[i][1], winCombos[i][2], "wincombos[i]0-2")
+    if (buttonsClicked1.includes(winCombos[i][0]) && buttonsClicked1.includes(winCombos[i][1]) && buttonsClicked1.includes(winCombos[i][2])) {
+      gameState = false;
       display.innerHTML = `${player1.token} won!`;
       increaseWins(player1);
-      reset();
+      setTimeout(reset, 3 * 1000);
     }
-    if (buttonsClicked2.includes((winCombos[i][0]) && (winCombos[i][2]) && (winCombos[i][3]))) {
+    if (buttonsClicked2.includes(winCombos[i][0]) && buttonsClicked2.includes(winCombos[i][1]) && buttonsClicked2.includes(winCombos[i][2])) {
+      gameState = false;
       display.innerHTML = `${player2.token} won!`;
       increaseWins(player2);
-      reset();
+      setTimeout(reset, 3 * 1000);
     }
   }
 }
@@ -121,13 +125,12 @@ function win() {
 function draw() {
   if (remainingChoices.length < 2) {
     display.innerHTML = "It's a draw!";
-    reset();
+    setTimeout(reset, 3 * 1000);
   }
 }
 
 // function to reset the game board and data to begin a new game
 function reset() {
-setTimeout(reset, 3 * 1000);
 display.innerHTML = "";
 playerStart += 1;
 currentTurn = playerStart;
@@ -138,4 +141,5 @@ for (var i = 0; i < buttonsArray.length; i++) {
 remainingChoices = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 buttonsClicked1 = [];
 buttonsClicked2 = [];
+gameState = true;
 }
